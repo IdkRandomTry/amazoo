@@ -43,7 +43,7 @@ def flag(f:str = ""):
 
 @bot.command(help = "basic command")
 async def ping(ctx):
-    await ctx.send("pong!") #simple command so that when you type "!ping" the bot will respond with "pong!"
+    await ctx.send("pong!") #simple command so that when you type ">ping" the bot will respond with "pong!"
 
 #briki
 @bot.command(help = 'Links to brilliant wiki closest to your query. \n e.g. >briki eulerian path')
