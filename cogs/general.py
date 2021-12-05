@@ -7,9 +7,21 @@ class General(commands.Cog):
     self.bot = bot
 
   @commands.command(help = 'Basic Command')
-  async def ping (ctx):
-    ctx.send("Pong!")
+  async def ping (self,ctx):
+    await ctx.send("Pong!")
+  
+  @commands.command(help = "Make a suggestion for the bot! Please be brief.")
+  async def suggest (self,ctx,*,suggestion:str):
+    SuggestionBox = open("Suggestions.txt")
+    SuggestionList = SuggestionBox.readlines()
+    SuggestionList.append(suggestion.replace('\n', '\ n') + "__BY__ " + str(ctx.author) + "\n")
 
+    SuggestionStr = "".join(SuggestionList)
+
+    DroppingSuggestion = open("Suggestions.txt", "w")
+    DroppingSuggestion.write(SuggestionStr)
+    DroppingSuggestion.close()
+    await ctx.send(str(ctx.author)+"'s suggestion: \n'"+suggestion+"'\n has been recorded. \nThank you")
 
 def setup(bot):
   bot.add_cog(General(bot))
