@@ -5,7 +5,13 @@ import os
 
 client = discord.Client()
 
-bot = commands.Bot(command_prefix = '>', help_command = commands.MinimalHelpCommand(dm_help = True, no_category = 'Others'))
+bot = commands.Bot(command_prefix = '>', help_command = commands.MinimalHelpCommand( no_category = 'Others'))
+
+@bot.event
+async def on_message(message):
+  if message.content == ">help":
+    await message.channel.send("Check out the Help Manual: https://sites.google.com/view/amazoo-help/home")
+  await bot.process_commands(message)
 
 #log
 @bot.event
