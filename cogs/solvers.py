@@ -51,8 +51,9 @@ class Solvers(commands.Cog):
     msg = discord.Embed(title = "Amazoo's Quadratic Equation Solver...", color =  000000)
 
     if a == 0:
-      msg.add_field(name = "Please check data", value = "Coefficient of x^2 term is 0",inline = False)
+      msg.add_field(name = "Please check data", value = "Coefficient of x² term is 0",inline = False)
       await ctx.send(embed = msg)
+      return
       
     else:
       eqn = f'{a} x² + {b}x + {c} = 0'
@@ -80,7 +81,7 @@ class Solvers(commands.Cog):
         except:
           msg.add_field(name = "Roots",value = f'```css\n{sqrtform}```')
 
-    msg.set_footer(text=f'Answer using Formula to solve quadratic equations \nrequested by: {ctx.author.display_name}')
+    msg.set_footer(text=f'Answered using Formula to solve quadratic equations \nrequested by: {ctx.author.display_name}')
 
     await ctx.send(embed = msg)
 
