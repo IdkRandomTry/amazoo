@@ -14,14 +14,14 @@ class General(commands.Cog):
   async def suggest (self,ctx,*,suggestion:str):
     SuggestionBox = open("Suggestions.txt")
     SuggestionList = SuggestionBox.readlines()
-    SuggestionList.append(suggestion.replace('\n', '\ n') + "__BY__ " + str(ctx.author) + "\n")
+    SuggestionList.append(suggestion.replace('\n', '\ n') + f'__BY__  {str(ctx.author)} (server - {str(ctx.guild)})\n')
 
     SuggestionStr = "".join(SuggestionList)
 
     DroppingSuggestion = open("Suggestions.txt", "w")
     DroppingSuggestion.write(SuggestionStr)
     DroppingSuggestion.close()
-    await ctx.send(str(ctx.author)+"'s suggestion: \n'"+suggestion+"'\n has been recorded. \nThank you")
+    await ctx.send(f'{str(ctx.author)}\'s suggestion: \n{suggestion}\n has been recorded. \nThank you')
 
 def setup(bot):
   bot.add_cog(General(bot))

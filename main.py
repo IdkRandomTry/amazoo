@@ -30,8 +30,10 @@ async def on_command_error(ctx,error):
   elif isinstance(error, commands.MissingPermissions):
     message = "You are missing the required permissions to run this command!"
   elif isinstance(error, commands.MissingRequiredArgument):
-    message = f"Missing a required argument: {error.param}"
+    message = f"Missing a required argument: `{error.param}`"
   elif isinstance(error, commands.ConversionError):
+    message = str(error)
+  elif isinstance(error, commands.CommandNotFound):
     message = str(error)
   else:
     message = "Oh no! Something went wrong while running the command!"
