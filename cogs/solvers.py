@@ -2,6 +2,8 @@ import discord
 from discord.ext import commands
 
 import math
+import cmath
+import statistics as stat
 
 class Solvers(commands.Cog):
 
@@ -67,23 +69,41 @@ class Solvers(commands.Cog):
       else:
         if D<0:
           msg.add_field(name = "Nature of roots", value = "Uh-Oh!! The roots are not real",inline = False)
+          x1 = (-b + cmath.sqrt(D))/(2*a)
+          x2 = (-b - cmath.sqrt(D))/(2*a)
        
         if D>0:
           msg.add_field(name = "Nature of roots", value = "The roots are real and distinct",inline = False)
+          x1 = (-b + math.sqrt(D))/(2*a)
+          x2 = (-b - math.sqrt(D))/(2*a)
 
         sqrtform = f'({-b} +- sqrt({str(D)}) )/{2*a}'
 
-        try:
-          x1 = (-b + math.sqrt(D))/(2*a)
-          x2 = (-b - math.sqrt(D))/(2*a)
-          res = str(x1)+" & "+ str(x2)
-          msg.add_field(name = "Roots",value = f'```css\n{sqrtform}```\nwhich is simplified to\n```css\n{res}```' ,inline = False)
-        except:
-          msg.add_field(name = "Roots",value = f'```css\n{sqrtform}```')
+        res = str(x1)+" & "+ str(x2)
+        msg.add_field(name = "Roots",value = f'```css\n{sqrtform}```\nwhich is simplified to\n```css\n{res}```' ,inline = False)
 
     msg.set_footer(text=f'Answered using Formula to solve quadratic equations \nrequested by: {ctx.author.display_name}')
 
     await ctx.send(embed = msg)
+
+  #Mean
+  @commands.command(help = "enter data separated by space. \n\n eg. >mean 1 2 3 4 5 ...")
+  async def mean (self, ctx, *data:float):
+    await ctx.send(f'Mean of given data is {stat.mean(data)}')
+
+  #Median
+  @commands.command(help = "enter data separated by space. \n\n eg. >median 1 2 3 4 5 ...")
+  async def median (self, ctx, *data:float):
+    await ctx.send(f'Median of given data is {stat.median(data)}')
+
+  #Mode
+  @commands.command(help = "enter data separated by space. \n\n eg. >mode 1 2 2 4 5 ...")
+  async def mode (self, ctx, *data:float):
+    mode = stat.multimode(data)
+    if len(mode)==1:
+      await ctx.send(f'Mode of given data is {stat.multimode(data)}')
+    else:
+      await ctx.send(f'Modes of given data are {stat.multimode(data)}')
 
 def setup(bot):
   bot.add_cog(Solvers(bot))

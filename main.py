@@ -42,6 +42,11 @@ async def on_command_error(ctx,error):
   
   await ctx.send(message)
 
+#command - servers
+@bot.command()
+async def servers(ctx):
+    await ctx.send(f"At the moment Eye of Amazoo is a part of `{len(bot.guilds)}` servers")
+
 #Loading cogs
 for filename in os.listdir('./cogs'):
   if filename.endswith('.py'):
