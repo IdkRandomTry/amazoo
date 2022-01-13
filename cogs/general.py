@@ -25,11 +25,14 @@ class General(commands.Cog):
 
   @commands.command(help = "links to top.gg page")
   async def about(self,ctx):
-    msg = discord.Embed(title="Eye of Amazoo", url = 'https://top.gg/bot/911989367524950057', description = "click on title for top.gg site")
+    msg = discord.Embed(title="Eye of Amazoo", description = "STEM - oriented bot. Type in '>help' for more information.")
+    msg.set_author(name = "click here for top.gg page",url = 'https://top.gg/bot/911989367524950057')
     msg.set_image(url = 'https://top.gg/api/widget/911989367524950057.svg')
-    msg.add_field(name = "prefix", value = "\'>\'")
-    msg.add_field(name = "latest additions", value = "• >mean, >mode and >median commands")
+    msg.set_thumbnail(url = 'https://images.discordapp.net/avatars/911989367524950057/70120c09cd5c095725f498000052d7d0.png?size=512')
+    msg.add_field(name = "Prefix", value = "\'>\'")
+    msg.add_field(name = "Latest Additions", value = "• >mean, >mode and >median commands")
     msg.add_field(name = "Cool stuff to do", value = "Check out >magsqr !!", inline = False)
+    msg.set_footer(text=f'requested by: {ctx.author.display_name}')
     await ctx.send(embed = msg)
 
   
