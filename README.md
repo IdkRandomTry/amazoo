@@ -1,4 +1,4 @@
 # amazoo
 Code for Eye of Amazoo
 
-Potential bot for Brilliantians server
+Discord Bot for Brilliantians server

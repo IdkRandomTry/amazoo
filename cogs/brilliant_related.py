@@ -43,6 +43,15 @@ class Brilliant_related(commands.Cog):
     if daURL == "empty":
       await ctx.send("The :eye: of Amazoo could not find Brilliant wiki similar to your query...")
 
+  #mobile view
+  @commands.command(help = 'Gives you the link to go to brilliant.org mobile view.')
+  async def mobview(self,ctx):
+    await ctx.send("It really bugged me as well when I couldn't go to mobile view from full site view. Here's the link for the switch: https://brilliant.org/?flavour=mobile")
+
+  #full site view
+  @commands.command(help = 'Gives you the link to go to brilliant.org full view.')
+  async def fullview(self,ctx):
+    await ctx.send("Here's the link for the switch: https://brilliant.org/?flavour=full")
 
 def setup(bot):
   bot.add_cog(Brilliant_related(bot))

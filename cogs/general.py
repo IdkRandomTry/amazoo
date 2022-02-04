@@ -23,7 +23,7 @@ class General(commands.Cog):
     DroppingSuggestion.close()
     await ctx.send(f'{str(ctx.author)}\'s suggestion: \n{suggestion}\n has been recorded. \nThank you')
 
-  @commands.command(help = "links to top.gg page")
+  @commands.command(help = "Try typing it in.")
   async def about(self,ctx):
     msg = discord.Embed(title="Eye of Amazoo", description = "STEM - oriented bot. Type in '>help' for more information.")
     msg.set_author(name = "click here for top.gg page",url = 'https://top.gg/bot/911989367524950057')

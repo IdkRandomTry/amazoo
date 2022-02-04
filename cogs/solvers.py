@@ -54,8 +54,6 @@ class Solvers(commands.Cog):
 
     if a == 0:
       msg.add_field(name = "Please check data", value = "Coefficient of x² term is 0",inline = False)
-      await ctx.send(embed = msg)
-      return
       
     else:
       eqn = f'{a} x² + {b}x + {c} = 0'
