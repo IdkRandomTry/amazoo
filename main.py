@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
-from keep_alive import keep_alive
+#from keep_alive import keep_alive
+from keep_alive import awake
 import os
 
 client = discord.Client()
@@ -52,5 +53,14 @@ for filename in os.listdir('./cogs'):
   if filename.endswith('.py'):
     bot.load_extension(f'cogs.{filename[:-3]}')
 
-keep_alive()
-bot.run(os.getenv("TOKEN"))
+awake("https://Amazoo.siddheshumarjee.repl.co", False)
+#keep_alive()
+
+try:
+  bot.run(os.environ['TOKEN'])
+except discord.errors.HTTPException:
+  print("flag")
+  print("\n Blocked by ratelimits restarting now" )
+  os.system('kill 1')
+  print("killed1")
+  os.system("python restarter.py")
