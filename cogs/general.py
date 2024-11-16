@@ -8,11 +8,11 @@ class General(commands.Cog):
   def __init__(self,bot):
     self.bot = bot
 
-  @commands.command(help = 'Basic Command')
+  @commands.hybrid_command(help = 'Basic Command')
   async def ping (self,ctx):
     await ctx.send("Pong!")
 
-  @commands.command(help = "Let Amazoo suggest a discussion topic as a conversation starter! (You can suggest topics by DMing Sidd_Bourbaki)")
+  @commands.hybrid_command(help = "Let Amazoo suggest a discussion topic as a conversation starter!")
   @commands.cooldown(1,300,commands.BucketType.guild)
   async def discuss(self,ctx):
 
@@ -56,11 +56,11 @@ class General(commands.Cog):
     except:
       return
 
-  @commands.command(help = "Make a suggestion for discussion topics")
-  async def addtopic (self,ctx,*,Topic:str):
+  @commands.hybrid_command(help = "Make a suggestion for discussion topics")
+  async def addtopic (self,ctx,*,topic):
     TopicBox = open("Topics.txt")
     TopicList = TopicBox.readlines()
-    TopicList.append(Topic.replace('\n', '\ n') + f'__BY__  {str(ctx.author)} (server - {str(ctx.guild)})\n')
+    TopicList.append(topic.replace('\n', '\ n') + f'__BY__  {str(ctx.author)} (server - {str(ctx.guild)})\n')
 
     TopicStr = "".join(TopicList)
 
@@ -69,7 +69,7 @@ class General(commands.Cog):
     DroppingTopic.close()
     await ctx.send(f'{str(ctx.author.mention)}\'s suggested \n`{Topic}`\nas a discussion topic! \nThank you')    
 
-  @commands.command(help = "Make a suggestion for the bot! Please be brief.")
+  @commands.hybrid_command(help = "Make a suggestion for the bot! Please be brief.")
   async def suggest (self,ctx,*,suggestion:str):
     SuggestionBox = open("Suggestions.txt")
     SuggestionList = SuggestionBox.readlines()
@@ -82,7 +82,7 @@ class General(commands.Cog):
     DroppingSuggestion.close()
     await ctx.send(f'{str(ctx.author)}\'s suggestion: \n{suggestion}\n has been recorded. \nThank you')
 
-  @commands.command(help = "Try typing it in.")
+  @commands.hybrid_command(help = "Try typing it in.")
   async def about(self,ctx):
     msg = discord.Embed(title="Eye of Amazoo", description = "STEM - oriented bot. Type in '>help' for more information.")
     msg.set_author(name = "click here for top.gg page",url = 'https://top.gg/bot/911989367524950057')
@@ -94,11 +94,11 @@ class General(commands.Cog):
     msg.set_footer(text=f'requested by: {ctx.author.display_name}')
     await ctx.send(embed = msg)
 
-  @commands.command(help = "embed msg and return it to make it stand out")
+  @commands.hybrid_command(help = "embed msg and return it to make it stand out")
   async def em(self, ctx,*, msg: str):
     author = "by " + str(ctx.author.display_name)
     msg = discord.Embed(title = msg, description = author)
     await ctx.send(embed = msg)  
 
-def setup(bot):
-  bot.add_cog(General(bot))
+async def setup(bot):
+  await bot.add_cog(General(bot))

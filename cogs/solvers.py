@@ -11,7 +11,7 @@ class Solvers(commands.Cog):
     self.bot = bot
 
   #n choose k
-  @commands.command(help = "For solving combinatrics(combinations) problems(n choose k). Remember to follow convention nCk")
+  @commands.hybrid_command(help = "For solving combinatrics(combinations) problems(n choose k). Remember to follow convention nCk")
   async def choose(self, ctx, n:float, k:float):
     ki = k
     if round(n)-n!=0 or round(ki)-ki != 0 or n < 0 or ki < 0 or ki > n:
@@ -32,7 +32,7 @@ class Solvers(commands.Cog):
     await ctx.send(ans)
 
   #n perm k
-  @commands.command(help = "For solving combinatrics (permutation) problems(n perm k). Remember to follow convention: nPk")
+  @commands.hybrid_command(help = "For solving combinatrics (permutation) problems(n perm k). Remember to follow convention: nPk")
   async def perm(self, ctx, n:float, k:float):
     if round(n)-n !=0 or round(k)-k != 0 or n < 0 or k < 0 or k > n:
       ans = f'You cant choose {str(k)} from {str(n)} let alone arrange/permute them'
@@ -48,7 +48,7 @@ class Solvers(commands.Cog):
     await ctx.send(ans)
 
   #qudratic equation solver
-  @commands.command(help = "Solving Quadratic equations. (Don't forget to follow general form: ax²+ bx + c = 0)")
+  @commands.hybrid_command(help = "Solving Quadratic equations. (Don't forget to follow general form: ax²+ bx + c = 0)")
   async def quad(self, ctx, a: float, b:float, c:float):
     msg = discord.Embed(title = "Amazoo's Quadratic Equation Solver...", color =  000000)
 
@@ -85,23 +85,26 @@ class Solvers(commands.Cog):
     await ctx.send(embed = msg)
 
   #Mean
-  @commands.command(help = "enter data separated by space. \n\n eg. >mean 1 2 3 4 5 ...")
-  async def mean (self, ctx, *data:float):
+  @commands.hybrid_command(help = "enter data separated by space. \n\n eg. >mean 1 2 3 4 5 ...")
+  async def mean (self, ctx, *, data_str):
+    data = [float(idx) for idx in data_str.split(' ')]
     await ctx.send(f'Mean of given data is {stat.mean(data)}')
 
   #Median
-  @commands.command(help = "enter data separated by space. \n\n eg. >median 1 2 3 4 5 ...")
-  async def median (self, ctx, *data:float):
+  @commands.hybrid_command(help = "enter data separated by space. \n\n eg. >median 1 2 3 4 5 ...")
+  async def median (self, ctx, *, data_str):
+    data = [float(idx) for idx in data_str.split(' ')]
     await ctx.send(f'Median of given data is {stat.median(data)}')
 
   #Mode
-  @commands.command(help = "enter data separated by space. \n\n eg. >mode 1 2 2 4 5 ...")
-  async def mode (self, ctx, *data:float):
+  @commands.hybrid_command(help = "enter data separated by space. \n\n eg. >mode 1 2 2 4 5 ...")
+  async def mode (self, ctx, *, data_str):
+    data = [float(idx) for idx in data_str.split(' ')]
     mode = stat.multimode(data)
     if len(mode)==1:
       await ctx.send(f'Mode of given data is {stat.multimode(data)}')
     else:
       await ctx.send(f'Modes of given data are {stat.multimode(data)}')
 
-def setup(bot):
-  bot.add_cog(Solvers(bot))
+async def setup(bot):
+  await bot.add_cog(Solvers(bot))

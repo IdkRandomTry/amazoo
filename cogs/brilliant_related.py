@@ -11,7 +11,7 @@ class Brilliant_related(commands.Cog):
     self.bot = bot
 
   #briki
-  @commands.command(help ='Links to brilliant wiki closest to your query.e.g. >briki eulerian path')
+  @commands.hybrid_command(help ='Links to brilliant wiki closest to your query.e.g. >briki eulerian path')
   async def briki(self,ctx,*,query:str):
     page = requests.get("https://www.google.com/search?q=brilliant wiki "+query+"&num=1")
     soup = BeautifulSoup(page.content, "html5lib")
@@ -44,14 +44,14 @@ class Brilliant_related(commands.Cog):
       await ctx.send("The :eye: of Amazoo could not find Brilliant wiki similar to your query...")
 
   #mobile view
-  @commands.command(help = 'Gives you the link to go to brilliant.org mobile view.')
+  @commands.hybrid_command(help = 'Gives you the link to go to brilliant.org mobile view.')
   async def mobview(self,ctx):
     await ctx.send("It really bugged me as well when I couldn't go to mobile view from full site view. Here's the link for the switch: https://brilliant.org/?flavour=mobile")
 
   #full site view
-  @commands.command(help = 'Gives you the link to go to brilliant.org full view.')
+  @commands.hybrid_command(help = 'Gives you the link to go to brilliant.org full view.')
   async def fullview(self,ctx):
     await ctx.send("Here's the link for the switch: https://brilliant.org/?flavour=full")
 
-def setup(bot):
-  bot.add_cog(Brilliant_related(bot))
+async def setup(bot):
+  await bot.add_cog(Brilliant_related(bot))
